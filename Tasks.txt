@@ -1,3 +1,4 @@
+https://sql-academy.org/ru/trainer
 Задание 1
 Вывести имена всех людей, которые есть в базе данных авиакомпаний
 
@@ -19,6 +20,7 @@ WHERE town_from = 'Moscow';
 -----------------------------------------------------------------
 Задание 4
 Вывести имена людей, которые заканчиваются на "man"
+https://github.com/IvanPadoltsev/SQL-Academy/blob/main/Tasks.txt
 
 SELECT name
 FROM passenger
@@ -58,4 +60,37 @@ WHERE town_from = 'Paris';
 Задание 9
 Какие компании организуют перелеты из Владивостока (Vladivostok)?
 
+SELECT name
+FROM Company
+	INNER JOIN Trip ON Company.id = Trip.company
+WHERE town_from = 'Vladivostok';
+-----------------------------------------------------------------
+Задание 10
+Вывести вылеты, совершенные с 10 ч. по 14 ч. 1 января 1900 г.
+
+SELECT *
+FROM Trip
+WHERE time_out BETWEEN '1900-01-01 10:00:00.000Z' AND '1900-01-01 14:00:00.000Z';
+-----------------------------------------------------------------
+Задание 11
+Выведите пассажиров с самым длинным ФИО. Пробелы, дефисы и точки считаются частью имени.
+
+SELECT name
+FROM Passenger
+WHERE LENGTH(name) = (SELECT MAX(LENGTH(name))FROM Passenger);
+-----------------------------------------------------------------
+Задание 12
+Вывести id и количество пассажиров для всех прошедших полётов
+
+SELECT trip, COUNT(passenger) AS count
+FROM Pass_in_trip
+GROUP BY trip;
+-----------------------------------------------------------------
+Задание 13
+Вывести имена людей, у которых есть полный тёзка среди пассажиров
+
+SELECT name
+FROM Passenger
+GROUP BY name
+HAVING COUNT(name) > 1;
 -----------------------------------------------------------------
